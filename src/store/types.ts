@@ -1,45 +1,48 @@
 export interface TodoState {
-    all: any[];
-    loading: boolean;
-    deletedTodos: any[];
+  all: any[];
+  loading: boolean;
+  deletedTodos: any[];
 }
 
 export enum TodoActionTypes {
-    GET_ALL = 'GET_ALL',
-    ADD = 'ADD',
-    EDIT = 'EDIT',
-    SET_CHECK = 'SET_CHECK',
-    DELETE = 'DELETE',
+  GET_ALL = 'GET_ALL',
+  ADD = 'ADD',
+  EDIT = 'EDIT',
+  CHANGE_CHECK = 'CHANGE_CHECK',
+  DELETE = 'DELETE',
 }
 
 export interface GetAllTodo {
-    type: TodoActionTypes.GET_ALL
+  type: TodoActionTypes.GET_ALL;
 }
 
 export interface AddTodo {
-    type: TodoActionTypes.ADD
+  type: TodoActionTypes.ADD;
 }
 
 export interface EditTodo {
-    type: TodoActionTypes.EDIT,
-    payload: {
-        id: string | number,
-        text: string
-    }
+  type: TodoActionTypes.EDIT,
+  payload: {
+    id: string | number,
+    text: string
+  }
 }
 
 export interface DeleteTodo {
-    type: TodoActionTypes.DELETE,
-    payload: number
+  type: TodoActionTypes.DELETE,
+  payload: number
 }
 
-export interface SetCheck {
-    type: TodoActionTypes.SET_CHECK,
-    payload: boolean
+export interface ChangeCheck {
+  type: TodoActionTypes.CHANGE_CHECK,
+  payload: {
+    id: string | number
+  }
 }
 
 export type TodoAction =
-    GetAllTodo |
-    AddTodo |
-    EditTodo |
-    DeleteTodo
+  GetAllTodo |
+  AddTodo |
+  EditTodo |
+  DeleteTodo |
+  ChangeCheck

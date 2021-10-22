@@ -33,6 +33,20 @@ export const TodoReducer = (
           return item;
         })]
       };
+      case TodoActionTypes.CHANGE_CHECK:
+        console.log(action.payload);
+      return {
+        ...state,
+        all: [...state.all.map((item, index) => {
+          if (item.id === action.payload.id) {
+            return {
+              ...item,
+              checked: !item.checked
+            };
+          }
+          return item;
+        })]
+      };
     default:
       return state;
   }
