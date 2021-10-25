@@ -20,46 +20,46 @@ export interface GetAllTodo {
 export interface AddTodo {
   type: TodoActionTypes.ADD;
   payload: {
-    id: string,
-    text: string
-  }
+    id: string;
+    text: string;
+  };
 }
 
 export interface EditTodo {
-  type: TodoActionTypes.EDIT,
+  type: TodoActionTypes.EDIT;
   payload: {
-    id: string | number,
-    text: string
-  }
+    id: string | number;
+    text: string;
+  };
 }
 
 export interface DeleteTodo {
-  type: TodoActionTypes.DELETE,
-  payload: number
+  type: TodoActionTypes.DELETE;
+  payload: number;
 }
 
 export interface ChangeCheck {
-  type: TodoActionTypes.CHANGE_CHECK,
+  type: TodoActionTypes.CHANGE_CHECK;
   payload: {
-    id: string
-  }
+    id: string;
+  };
 }
 export interface ChangeStatus {
-  type: TodoActionTypes.CHANGE_STATUS,
+  type: TodoActionTypes.CHANGE_STATUS;
   payload: {
-    id: string,
-    status: string
-  }
+    id: string;
+    status: string;
+  };
 }
 export interface DeleteSelected {
-  type: TodoActionTypes.DELETE_SELECTED,
+  type: TodoActionTypes.DELETE_SELECTED;
 }
 
 export type TodoAction =
-  GetAllTodo |
-  AddTodo |
-  EditTodo |
-  DeleteTodo |
-  ChangeCheck |
-  ChangeStatus |
-  DeleteSelected
+  | GetAllTodo
+  | AddTodo
+  | EditTodo
+  | DeleteTodo
+  | ChangeCheck
+  | ChangeStatus
+  | DeleteSelected;

@@ -1,13 +1,13 @@
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import './Main.css';
-import { ContainerTask } from './ContainerTask/ContainerTask';
+import './Main.module.css';
+import ContainerDraggableList from './NewDnd/Container';
 
 const Main = () => {
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className='container-components'>
-        <ContainerTask />
+      <div className="container-components">
+        <ContainerDraggableList />
       </div>
     </DndProvider>
   );
