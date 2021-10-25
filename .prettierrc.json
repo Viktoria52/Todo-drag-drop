@@ -1,4 +1,7 @@
 {
   "singleQuote": true,
-  "semi": true
+  "semi": true,
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescript's]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "tsxSingleQuote": false
 }
