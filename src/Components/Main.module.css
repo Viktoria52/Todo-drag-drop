@@ -1,0 +1,12 @@
+.container-components {
+  display: flex;
+  width: 1200px;
+  justify-content: space-between;
+}
+
+.container-components > div {
+  background-color: #87cefa;
+  width: 30%;
+  text-align: center;
+  border-radius: 7px;
+}
