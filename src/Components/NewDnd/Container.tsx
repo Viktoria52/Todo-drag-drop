@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../store/store';
 import React from 'react';
-import { DraggableList } from './DraggableList.tsx';
+import { DraggableList } from './DraggableList';
 
 export default function ContainerDraggableList() {
   const { all } = useAppSelector((state) => state.TodoReducer);

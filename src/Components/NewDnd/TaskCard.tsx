@@ -8,9 +8,10 @@ import './style/card.module.css';
 interface TaskPropType {
   id: string;
   text: string;
+  checked?: boolean;
 }
 
-export const TaskCard = ({ text, id }: TaskPropType) => {
+export const TaskCard = ({ text, id, checked }: TaskPropType) => {
   let newText: string;
   const [editMode, setEditMode] = useState(false);
   const dispatch = useAppDispatch();
@@ -41,9 +42,21 @@ export const TaskCard = ({ text, id }: TaskPropType) => {
     });
   };
 
+  const onKeyDownInput = (event: any, id: string, text: string) => {
+    if (event.key === 'Enter') {
+      saveEdit(id, text);
+      setEditMode(false);
+    }
+  };
+
   return (
     <>
-      {!editMode && <Checkbox onChange={() => changeCheckbox(id)} />}
+      {!editMode && (
+        <Checkbox
+          checked={checked}
+          onChange={() => changeCheckbox(id)}
+        />
+      )}
       {!editMode && <span className="text"> {text} </span>}
       {editMode && (
         <>
@@ -53,6 +66,8 @@ export const TaskCard = ({ text, id }: TaskPropType) => {
             style={{ width: '80%' }}
             defaultValue={text}
             onChange={(e) => changeEdit(e)}
+            onKeyDown={(e) => onKeyDownInput(e, id, text)}
+            maxLength={35}
           />
           <CheckOutlined
             onClick={() => {
@@ -62,7 +77,6 @@ export const TaskCard = ({ text, id }: TaskPropType) => {
           />
         </>
       )}
-
       {!editMode && (
         <EditOutlined
           onClick={() => {
@@ -71,7 +85,6 @@ export const TaskCard = ({ text, id }: TaskPropType) => {
           }}
         />
       )}
-
       <DeleteOutlined onClick={() => deleteTask(id)} />
     </>
   );

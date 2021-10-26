@@ -6,7 +6,7 @@ import clamp from 'lodash.clamp';
 import swap from 'lodash-move';
 import styles from './style/styles.module.css';
 import { TaskCard } from './TaskCard';
-
+import { FullscreenOutlined } from '@ant-design/icons';
 
 const fn =
   (order: number[], active = false, originalIndex = 0, curIndex = 0, y = 0) =>
@@ -43,15 +43,13 @@ export function DraggableList({ items }: { items: any[] }) {
     api.start(fn(newOrder, active, originalIndex, curIndex, y));
     if (!active) order.current = newOrder;
   });
-  useEffect(()=>{
-    console.log('items:', items);
-
-  }, [items])
+  useEffect(() => {
+    order.current.push(order.current.length);
+  }, [items]);
   return (
     <div className={styles.content} style={{ height: items.length * 100 }}>
       {springs.map(({ zIndex, shadow, y, scale }, i) => (
         <animated.div
-          {...bind(i)}
           key={i}
           style={{
             zIndex,
@@ -62,10 +60,24 @@ export function DraggableList({ items }: { items: any[] }) {
             scale,
           }}
         >
-          <TaskCard text={items[i][1][1]} id={items[i][0][1]} />
+          {items.length > 0 && (
+            <TaskCard
+              text={items[i][1][1]}
+              id={items[i][0][1]}
+              checked={items[i][2][1]}
+            />
+          )}
+          <FullscreenOutlined
+            {...bind(i)}
+            style={{
+              color: 'black',
+              position: 'absolute',
+              right: '0',
+              fontSize: '20px',
+            }}
+          />
         </animated.div>
       ))}
     </div>
   );
 }
-

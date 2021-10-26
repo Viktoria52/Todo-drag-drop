@@ -2,11 +2,11 @@ import { TodoAction, TodoActionTypes, TodoState } from './types';
 
 const initialState: TodoState = {
   all: [
-    { id: '1e', text: 'example', checked: false, status: 'all' },
-    { id: '2e', text: 'example task', checked: false, status: 'all' },
-    { id: '3e', text: 'some example task', checked: false, status: 'all' },
-    { id: '4e', text: 'awesome', checked: false, status: 'all' },
-    { id: '5e', text: 'night owl', checked: false, status: 'all' },
+    { id: '1e', text: 'example', checked: false},
+    { id: '2e', text: 'example task', checked: false},
+    { id: '3e', text: 'some example task', checked: false},
+    { id: '4e', text: 'awesome', checked: false},
+    { id: '5e', text: 'night owl', checked: false},
   ],
   loading: false,
 };
@@ -35,7 +35,6 @@ export const TodoReducer = (
         ],
       };
     case TodoActionTypes.EDIT:
-      console.log('action:', action.payload);
       return {
         ...state,
         all: [
@@ -69,21 +68,6 @@ export const TodoReducer = (
       return {
         ...state,
         all: [...state.all.filter((item) => item.id !== action.payload)],
-      };
-    case TodoActionTypes.CHANGE_STATUS:
-      return {
-        ...state,
-        all: [
-          ...state.all.map((item) => {
-            if (item.id === action.payload.id) {
-              return {
-                ...item,
-                status: action.payload.status,
-              };
-            }
-            return item;
-          }),
-        ],
       };
     case TodoActionTypes.DELETE_SELECTED:
       return {

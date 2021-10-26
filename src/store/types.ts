@@ -9,7 +9,6 @@ export enum TodoActionTypes {
   EDIT = 'EDIT',
   CHANGE_CHECK = 'CHANGE_CHECK',
   DELETE = 'DELETE',
-  CHANGE_STATUS = 'CHANGE_STATUS',
   DELETE_SELECTED = 'DELETE_SELECTED',
 }
 
@@ -44,13 +43,7 @@ export interface ChangeCheck {
     id: string;
   };
 }
-export interface ChangeStatus {
-  type: TodoActionTypes.CHANGE_STATUS;
-  payload: {
-    id: string;
-    status: string;
-  };
-}
+
 export interface DeleteSelected {
   type: TodoActionTypes.DELETE_SELECTED;
 }
@@ -61,5 +54,4 @@ export type TodoAction =
   | EditTodo
   | DeleteTodo
   | ChangeCheck
-  | ChangeStatus
   | DeleteSelected;

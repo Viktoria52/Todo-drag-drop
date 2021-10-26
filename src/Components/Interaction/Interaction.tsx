@@ -30,7 +30,7 @@ export const Interaction = () => {
     setValue(event.target.value);
   };
 
-  const deleteAll = () => {
+  const deleteSelected = () => {
     dispatch({
       type: TodoActionTypes.DELETE_SELECTED,
     });
@@ -50,12 +50,13 @@ export const Interaction = () => {
         placeholder="Text for task"
         value={defaultInputValue}
         onKeyDown={(e) => onKeyDownInput(e)}
+        maxLength={35}
       />
       <Button onClick={addTask} className="btn" type="default">
         Add
       </Button>
       {checkedTasks.length ? (
-        <Button onClick={deleteAll} type="primary">
+        <Button onClick={deleteSelected} type="primary">
           Delete checked
         </Button>
       ) : null}
