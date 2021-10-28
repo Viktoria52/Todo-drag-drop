@@ -1,4 +1,8 @@
 .text {
   margin: 0 5px;
   word-wrap: break-word;
+  text-transform: unset;
+}
+.container-icons {
+  width: 30px;
 }
