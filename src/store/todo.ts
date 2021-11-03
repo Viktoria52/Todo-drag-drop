@@ -1,11 +1,11 @@
-import { TodoAction, TodoActionTypes, TodoState } from './types';
-import { getArrayItemOfTask } from '../utils';
+import { TodoAction, TodoActionTypes, TodoState } from './types'
+import { getFilteredArray } from '../utils/utils';
 
 const initialState: TodoState = {
   all: [],
   loading: false,
-  error: false
-};
+  error: false,
+}
 
 export const TodoReducer = (
   state = initialState,
@@ -15,8 +15,8 @@ export const TodoReducer = (
     case TodoActionTypes.GET_ALL:
       return {
         ...state,
-        all: action.payload
-      };
+        all: action.payload,
+      }
     case TodoActionTypes.ADD:
       return {
         ...state,
@@ -25,10 +25,10 @@ export const TodoReducer = (
           {
             id: action.payload.id,
             text: action.payload.text,
-            checked: false
-          }
+            checked: false,
+          },
         ],
-      };
+      }
     case TodoActionTypes.EDIT:
       return {
         ...state,
@@ -37,13 +37,13 @@ export const TodoReducer = (
             if (item.id === action.payload.id) {
               return {
                 ...item,
-                text: action.payload.text
-              };
+                text: action.payload.text,
+              }
             }
-            return item;
-          })
-        ]
-      };
+            return item
+          }),
+        ],
+      }
     case TodoActionTypes.CHANGE_CHECK:
       return {
         ...state,
@@ -53,30 +53,28 @@ export const TodoReducer = (
               return {
                 ...item,
                 checked: !item.checked,
-              };
+              }
             }
-            return item;
+            return item
           }),
         ],
-      };
+      }
     case TodoActionTypes.DELETE:
       return {
         ...state,
-        all: [getArrayItemOfTask()]
-      };
+        all: [...state.all.filter((task) => task.id !== action.payload)],
+      }
     case TodoActionTypes.DELETE_SELECTED:
       return {
         ...state,
-        all: [...state.all.filter((task) => !task.checked)]
-      };
-      case TodoActionTypes.SOME_ERROR:
+        all: [...state.all.filter((task) => !task.checked)],
+      }
+    case TodoActionTypes.SOME_ERROR:
       return {
         ...state,
-        error: action.message
-      };
+        error: action.payload,
+      }
     default:
-      return state;
+      return state
   }
-};
-
-
+}

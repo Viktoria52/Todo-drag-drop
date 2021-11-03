@@ -1,55 +1,66 @@
-import { Checkbox, Input } from 'antd';
-import { CheckOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import React, { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/store';
-import './style/card.module.css';
-import { changeCheck, changePositionItems, deleteItemOfTask, editTask, getAll } from '../../store/thunks';
+import { Checkbox, Input } from 'antd'
+import { CheckOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
+import React, { useCallback, useState } from 'react'
+import { useAppDispatch, useAppSelector } from '../../store/store'
+import './style/card.module.css'
+import {
+  changeCheck,
+  deleteItemOfTask,
+  editTask,
+  getAll,
+} from '../../store/thunks'
+import { deleteDelay } from '../../utils/contants'
 
 interface TaskPropType {
-  id: string;
-  text: string;
-  checked?: boolean;
-  movableItem?: number;
-  currentRow?: number;
-  active: boolean;
-  direction?: number
+  id: string
+  text: string
+  checked?: boolean
+  deleteItem?: any
 }
 
-export const TaskCard = ({ text, id, checked, movableItem, currentRow, active, direction }: TaskPropType) => {
-  const { all } = useAppSelector((state) => state.TodoReducer);
-  let newText: string = '';
-  const [editMode, setEditMode] = useState(false);
-  const dispatch = useAppDispatch();
+export const TaskCard = ({ text, id, checked, deleteItem }: TaskPropType) => {
+  let newText: string = ''
+  const [editMode, setEditMode] = useState(false)
+  const dispatch = useAppDispatch()
+
   const deleteTask = (id: string) => {
-    dispatch(deleteItemOfTask(id))
-    dispatch(getAll())
-  };
+    setTimeout(() => {
+      dispatch(deleteItemOfTask(id))
+      dispatch(getAll())
+    }, deleteDelay)
+  }
+  const onClickDelete = useCallback(
+    (id: string) => {
+      if (deleteItem) {
+        deleteItem(id)
+      }
+    },
+    [deleteItem]
+  )
   const changeEdit = (event: any) => {
-    newText = event.target.value;
-  };
+    newText = event.target.value
+  }
   const saveEdit = (id: string, defaultValue?: string) => {
-    const editedText:any = newText || defaultValue
+    const editedText: any = newText || defaultValue
     dispatch(editTask(id, editedText))
-  };
+  }
   const changeCheckbox = (id: string) => {
-    dispatch(changeCheck(id));
-  };
+    dispatch(changeCheck(id))
+  }
 
   const onKeyDownInput = (event: any, id: string, text: string) => {
     if (event.key === 'Enter') {
-      saveEdit(id, text);
-      setEditMode(false);
+      saveEdit(id, text)
+      setEditMode(false)
     }
-  };
-
-  // useEffect(() => {
-  //   // @ts-ignore
-  //   dispatch(changePositionItems(movableItem, currentRow, active))
-  //
-  // }, [movableItem, currentRow, active]);
+  }
 
   return (
-    <>
+    <div
+      style={{
+        display: 'contents',
+      }}
+    >
       {!editMode && (
         <Checkbox checked={checked} onChange={() => changeCheckbox(id)} />
       )}
@@ -72,23 +83,33 @@ export const TaskCard = ({ text, id, checked, movableItem, currentRow, active, d
           />
           <CheckOutlined
             onClick={() => {
-              saveEdit(id, text);
-              setEditMode(false);
+              saveEdit(id, text)
+              setEditMode(false)
             }}
           />
         </>
       )}
-      <div className="container-icons">
+      <div
+        className="container-icons"
+        style={{
+          fontSize: '22px',
+        }}
+      >
         {!editMode && (
           <EditOutlined
             onClick={() => {
-              setEditMode(true);
-              newText = text;
+              setEditMode(true)
+              newText = text
             }}
           />
         )}
-        <DeleteOutlined onClick={() => deleteTask(id)} />
+        <DeleteOutlined
+          onClick={() => {
+            onClickDelete(id)
+            deleteTask(id)
+          }}
+        />
       </div>
-    </>
-  );
-};
+    </div>
+  )
+}

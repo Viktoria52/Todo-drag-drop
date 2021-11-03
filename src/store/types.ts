@@ -1,6 +1,6 @@
 export interface TodoState {
-  all: any[];
-  loading: boolean;
+  all: any[]
+  loading: boolean
   error: unknown
 }
 
@@ -17,52 +17,53 @@ export enum TodoActionTypes {
 }
 
 export interface GetAllTodo {
-  type: TodoActionTypes.GET_ALL;
+  type: TodoActionTypes.GET_ALL
   payload: any[]
 }
 
 export interface SetAllTodo {
-  type: TodoActionTypes.SET_ALL;
+  type: TodoActionTypes.SET_ALL
 }
 
 export interface AddTodo {
-  type: TodoActionTypes.ADD;
+  type: TodoActionTypes.ADD
   payload: {
-    id: string;
-    text: string;
-  };
+    id: string
+    text: string
+  }
 }
 
 export interface EditTodo {
-  type: TodoActionTypes.EDIT;
+  type: TodoActionTypes.EDIT
   payload: {
-    id: string | number;
-    text: string;
-  };
+    id: string | number
+    text: string
+  }
 }
 
 export interface DeleteTodo {
-  type: TodoActionTypes.DELETE;
-  payload?: string;
+  type: TodoActionTypes.DELETE
+  payload?: string
 }
 
 export interface ChangeCheck {
-  type: TodoActionTypes.CHANGE_CHECK;
+  type: TodoActionTypes.CHANGE_CHECK
   payload: {
-    id: string;
-  };
+    id: string
+  }
 }
 
 export interface DeleteSelected {
-  type: TodoActionTypes.DELETE_SELECTED;
+  type: TodoActionTypes.DELETE_SELECTED
 }
+
 export interface SomeError {
-  type: TodoActionTypes.SOME_ERROR;
-  message: unknown
+  type: TodoActionTypes.SOME_ERROR
+  payload: any
 }
 
 export interface ChangePositionItems {
-  type: TodoActionTypes.CHANGE_POSITION_ITEMS;
+  type: TodoActionTypes.CHANGE_POSITION_ITEMS
 }
 
 export type TodoAction =
@@ -74,5 +75,4 @@ export type TodoAction =
   | DeleteSelected
   | SetAllTodo
   | SomeError
-| ChangePositionItems
-
+  | ChangePositionItems

@@ -3,6 +3,8 @@
   word-wrap: break-word;
   text-transform: unset;
 }
+
 .container-icons {
   width: 30px;
+  font-size: 22px;
 }
